@@ -4,7 +4,9 @@
 #include <QGLWidget>
 #include <GL/glut.h>
 #include <QTimer>
-#include <QKeyEvent> //Подключили библиотеку событий клавиатуры
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QPoint>
 
 class Scene : public QGLWidget
 {
@@ -20,20 +22,27 @@ protected:
     void paintGL();
     void keyPressEvent(QKeyEvent* ke);
     void keyReleaseEvent(QKeyEvent* ke);
+    void mousePressEvent(QMouseEvent* me);
+    void mouseReleaseEvent(QMouseEvent* me);
+    void mouseMoveEvent(QMouseEvent* me);
 
 private:
     QTimer* timer;
     GLfloat xn;
     GLfloat yn;
 
-    //Логические флаги, описывающе нажатие клавиш, вверх, вниз, вправо, влево.
     bool up_press;
     bool down_press;
     bool left_press;
     bool right_press;
+    bool right_mouse;
+    bool left_mouse;
+    QPoint mouse_pos;
+
+
 
 private slots:
-    void eventHandler(); //Обработчик событий(в нашем случае, пока только клавиатуры)
+    void eventHandler();
 };
 
 #endif // SCENE_H
